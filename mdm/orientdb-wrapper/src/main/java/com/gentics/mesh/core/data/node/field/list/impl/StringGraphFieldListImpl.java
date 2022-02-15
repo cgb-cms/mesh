@@ -13,6 +13,7 @@ import com.gentics.mesh.context.InternalActionContext;
 import com.gentics.mesh.core.data.HibField;
 import com.gentics.mesh.core.data.generic.MeshVertexImpl;
 import com.gentics.mesh.core.data.node.field.FieldGetter;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.FieldTransformer;
 import com.gentics.mesh.core.data.node.field.FieldUpdater;
 import com.gentics.mesh.core.data.node.field.HibStringField;
@@ -68,7 +69,7 @@ public class StringGraphFieldListImpl extends AbstractBasicGraphFieldList<HibStr
 	}
 
 	@Override
-	public StringFieldListImpl transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	public StringFieldListImpl transformToRest(FieldTransformParameters transformParameters) {
 		StringFieldListImpl restModel = new StringFieldListImpl();
 		for (HibStringField item : getList()) {
 			restModel.add(item.getString());

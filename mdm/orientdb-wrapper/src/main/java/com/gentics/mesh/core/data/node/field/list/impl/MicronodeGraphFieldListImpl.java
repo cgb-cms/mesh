@@ -19,6 +19,7 @@ import com.gentics.mesh.core.data.dao.MicroschemaDao;
 import com.gentics.mesh.core.data.generic.MeshVertexImpl;
 import com.gentics.mesh.core.data.node.HibMicronode;
 import com.gentics.mesh.core.data.node.Micronode;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.impl.MicronodeGraphFieldImpl;
 import com.gentics.mesh.core.data.node.field.list.AbstractReferencingGraphFieldList;
 import com.gentics.mesh.core.data.node.field.list.MicronodeGraphFieldList;
@@ -58,7 +59,9 @@ public class MicronodeGraphFieldListImpl extends AbstractReferencingGraphFieldLi
 	}
 
 	@Override
-	public MicronodeFieldList transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	public MicronodeFieldList transformToRest(FieldTransformParameters transformParameters) {
+		InternalActionContext ac = transformParameters.ac();
+		int level = transformParameters.level();
 
 		MicronodeFieldList restModel = new MicronodeFieldListImpl();
 

@@ -13,6 +13,7 @@ import com.gentics.mesh.context.InternalActionContext;
 import com.gentics.mesh.core.data.HibField;
 import com.gentics.mesh.core.data.generic.MeshVertexImpl;
 import com.gentics.mesh.core.data.node.field.FieldGetter;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.FieldTransformer;
 import com.gentics.mesh.core.data.node.field.FieldUpdater;
 import com.gentics.mesh.core.data.node.field.HibNumberField;
@@ -68,7 +69,7 @@ public class NumberGraphFieldListImpl extends AbstractBasicGraphFieldList<HibNum
 	}
 
 	@Override
-	public NumberFieldListImpl transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	public NumberFieldListImpl transformToRest(FieldTransformParameters transformParameters) {
 		NumberFieldListImpl restModel = new NumberFieldListImpl();
 		for (HibNumberField item : getList()) {
 			restModel.add(item.getNumber());

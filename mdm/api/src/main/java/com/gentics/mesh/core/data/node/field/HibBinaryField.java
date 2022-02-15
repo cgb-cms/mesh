@@ -15,7 +15,7 @@ import com.gentics.mesh.handler.ActionContext;
 import com.gentics.mesh.util.NodeUtil;
 import com.gentics.mesh.util.UniquenessUtil;
 
-public interface HibBinaryField extends HibField, HibBasicField<BinaryField>, HibElement, HibDisplayField {
+public interface HibBinaryField extends HibField, HibTransformableField<BinaryField>, HibElement, HibDisplayField {
 
 	/**
 	 * Return the binary filename.
@@ -233,7 +233,7 @@ public interface HibBinaryField extends HibField, HibBasicField<BinaryField>, Hi
 	String getPlainText();
 
 	@Override
-	default BinaryField transformToRest(ActionContext ac) {
+	default BinaryField transformToRest(FieldTransformParameters transformParameters) {
 		BinaryField restModel = new BinaryFieldImpl();
 		restModel.setFileName(getFileName());
 		restModel.setMimeType(getMimeType());

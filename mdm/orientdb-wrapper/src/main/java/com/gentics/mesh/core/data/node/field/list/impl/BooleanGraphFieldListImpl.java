@@ -9,6 +9,7 @@ import com.gentics.mesh.context.BulkActionContext;
 import com.gentics.mesh.context.InternalActionContext;
 import com.gentics.mesh.core.data.generic.MeshVertexImpl;
 import com.gentics.mesh.core.data.node.field.BooleanGraphField;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.HibBooleanField;
 import com.gentics.mesh.core.data.node.field.impl.BooleanGraphFieldImpl;
 import com.gentics.mesh.core.data.node.field.list.AbstractBasicGraphFieldList;
@@ -60,7 +61,7 @@ public class BooleanGraphFieldListImpl extends AbstractBasicGraphFieldList<HibBo
 	}
 
 	@Override
-	public BooleanFieldListImpl transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	public BooleanFieldListImpl transformToRest(FieldTransformParameters transformParameters) {
 		BooleanFieldListImpl restModel = new BooleanFieldListImpl();
 		for (HibBooleanField item : getList()) {
 			restModel.add(item.getBoolean());

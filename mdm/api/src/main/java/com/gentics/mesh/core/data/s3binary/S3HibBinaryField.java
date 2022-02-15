@@ -6,21 +6,21 @@ import java.util.Objects;
 
 import com.gentics.mesh.core.data.HibElement;
 import com.gentics.mesh.core.data.HibField;
-import com.gentics.mesh.core.data.node.field.HibBasicField;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.HibDisplayField;
+import com.gentics.mesh.core.data.node.field.HibTransformableField;
 import com.gentics.mesh.core.rest.node.field.S3BinaryField;
 import com.gentics.mesh.core.rest.node.field.binary.Location;
 import com.gentics.mesh.core.rest.node.field.image.FocalPoint;
 import com.gentics.mesh.core.rest.node.field.impl.S3BinaryFieldImpl;
 import com.gentics.mesh.core.rest.node.field.s3binary.S3BinaryMetadata;
-import com.gentics.mesh.handler.ActionContext;
 import com.gentics.mesh.util.NodeUtil;
 import com.gentics.mesh.util.UniquenessUtil;
 
 /**
  * MDM interface for the s3binary field information.
  */
-public interface S3HibBinaryField extends HibField, HibBasicField<S3BinaryField>, HibElement, HibDisplayField {
+public interface S3HibBinaryField extends HibField, HibTransformableField<S3BinaryField>, HibElement, HibDisplayField {
 
 	/**
 	 * Return the referenced s3binary entity.
@@ -54,7 +54,7 @@ public interface S3HibBinaryField extends HibField, HibBasicField<S3BinaryField>
 	}
 
 	@Override
-	default S3BinaryField transformToRest(ActionContext ac) {
+	default S3BinaryField transformToRest(FieldTransformParameters parameters) {
 		S3BinaryField restModel = new S3BinaryFieldImpl();
 
 		S3HibBinary binary = getS3Binary();

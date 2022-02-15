@@ -15,7 +15,7 @@ import com.gentics.mesh.context.impl.DummyBulkActionContext;
 import com.gentics.mesh.core.data.GraphFieldContainer;
 import com.gentics.mesh.core.data.HibField;
 import com.gentics.mesh.core.data.binary.HibBinary;
-import com.gentics.mesh.core.data.impl.GraphFieldTypes;
+import com.gentics.mesh.core.data.node.field.FieldTypesOperations;
 import com.gentics.mesh.core.data.node.HibNode;
 import com.gentics.mesh.core.data.node.Micronode;
 import com.gentics.mesh.core.data.node.field.BinaryGraphField;
@@ -55,7 +55,6 @@ import com.gentics.mesh.core.data.node.field.nesting.MicronodeGraphField;
 import com.gentics.mesh.core.data.node.field.nesting.NodeGraphField;
 import com.gentics.mesh.core.data.node.impl.MicronodeImpl;
 import com.gentics.mesh.core.data.s3binary.S3HibBinary;
-import com.gentics.mesh.core.data.schema.HibFieldSchemaVersionElement;
 import com.gentics.mesh.core.data.schema.HibMicroschemaVersion;
 import com.gentics.mesh.core.rest.error.GenericRestException;
 import com.gentics.mesh.core.rest.node.FieldMap;
@@ -336,9 +335,9 @@ public abstract class AbstractGraphFieldContainerImpl extends AbstractBasicGraph
 
 	@Override
 	public Field getRestField(InternalActionContext ac, String fieldKey, FieldSchema fieldSchema, List<String> languageTags, int level) {
-		GraphFieldTypes type = GraphFieldTypes.valueByFieldSchema(fieldSchema);
+		FieldTypesOperations<?, ?> type = FieldTypesOperations.valueByFieldSchema(fieldSchema);
 		if (type != null) {
-			return type.getRestFieldFromGraph(this, ac, fieldKey, fieldSchema, languageTags, level, () -> getNode());
+			return type.getRestFieldFromEntity(this, ac, fieldKey, languageTags, level, () -> getNode());
 		} else {
 			throw error(BAD_REQUEST, "type unknown");
 		}
@@ -358,7 +357,7 @@ public abstract class AbstractGraphFieldContainerImpl extends AbstractBasicGraph
 	 *            Schema of the field
 	 */
 	protected void updateField(InternalActionContext ac, FieldMap fieldMap, String fieldKey, FieldSchema fieldSchema, FieldSchemaContainer schema) {
-		GraphFieldTypes type = GraphFieldTypes.valueByFieldSchema(fieldSchema);
+		FieldTypesOperations<?, ?> type = FieldTypesOperations.valueByFieldSchema(fieldSchema);
 		if (type != null) {
 			type.updateField(this, ac, fieldMap, fieldKey, fieldSchema, schema);
 		} else {
@@ -381,7 +380,7 @@ public abstract class AbstractGraphFieldContainerImpl extends AbstractBasicGraph
 
 	@Override
 	public HibField getField(FieldSchema fieldSchema) {
-		GraphFieldTypes type = GraphFieldTypes.valueByFieldSchema(fieldSchema);
+		FieldTypesOperations<?, ?> type = FieldTypesOperations.valueByFieldSchema(fieldSchema);
 		if (type != null) {
 			return type.getField(this, fieldSchema);
 		} else {

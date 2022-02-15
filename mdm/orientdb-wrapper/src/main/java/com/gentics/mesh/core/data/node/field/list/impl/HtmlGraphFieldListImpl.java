@@ -8,6 +8,7 @@ import com.gentics.madl.type.TypeHandler;
 import com.gentics.mesh.context.BulkActionContext;
 import com.gentics.mesh.context.InternalActionContext;
 import com.gentics.mesh.core.data.generic.MeshVertexImpl;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.HibHtmlField;
 import com.gentics.mesh.core.data.node.field.HtmlGraphField;
 import com.gentics.mesh.core.data.node.field.impl.HtmlGraphFieldImpl;
@@ -59,7 +60,7 @@ public class HtmlGraphFieldListImpl extends AbstractBasicGraphFieldList<HibHtmlF
 	}
 
 	@Override
-	public HtmlFieldListImpl transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	public HtmlFieldListImpl transformToRest(FieldTransformParameters parameters) {
 		HtmlFieldListImpl restModel = new HtmlFieldListImpl();
 		for (HibHtmlField item : getList()) {
 			restModel.add(item.getHTML());

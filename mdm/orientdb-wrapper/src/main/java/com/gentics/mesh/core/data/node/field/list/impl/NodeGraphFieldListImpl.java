@@ -14,6 +14,7 @@ import com.gentics.mesh.core.data.dao.UserDao;
 import com.gentics.mesh.core.data.generic.MeshVertexImpl;
 import com.gentics.mesh.core.data.node.HibNode;
 import com.gentics.mesh.core.data.node.Node;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.impl.NodeGraphFieldImpl;
 import com.gentics.mesh.core.data.node.field.list.AbstractReferencingGraphFieldList;
 import com.gentics.mesh.core.data.node.field.list.NodeGraphFieldList;
@@ -57,7 +58,11 @@ public class NodeGraphFieldListImpl extends AbstractReferencingGraphFieldList<Hi
 	}
 
 	@Override
-	public NodeFieldList transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	public NodeFieldList transformToRest(FieldTransformParameters transformParameters) {
+		InternalActionContext ac = transformParameters.ac();
+		List<String> languageTags = transformParameters.languageTags();
+		String fieldKey = transformParameters.fieldKey();
+		int level = transformParameters.level();
 
 		// Check whether the list should be returned in a collapsed or expanded format
 		NodeParameters parameters = ac.getNodeParameters();

@@ -21,6 +21,7 @@ import com.gentics.mesh.core.data.diff.FieldChangeTypes;
 import com.gentics.mesh.core.data.diff.FieldContainerChange;
 import com.gentics.mesh.core.data.generic.MeshEdgeImpl;
 import com.gentics.mesh.core.data.node.HibMicronode;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.GraphField;
 import com.gentics.mesh.core.data.node.field.nesting.HibMicronodeField;
 import com.gentics.mesh.core.data.node.field.nesting.MicronodeGraphField;
@@ -67,7 +68,10 @@ public class MicronodeGraphFieldImpl extends MeshEdgeImpl implements MicronodeGr
 	}
 
 	@Override
-	public MicronodeField transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	public MicronodeField transformToRest(FieldTransformParameters transformParameters) {
+		InternalActionContext ac = transformParameters.ac();
+		List<String> languageTags = transformParameters.languageTags();
+		int level = transformParameters.level();
 		HibMicronode micronode = getMicronode();
 		if (micronode == null) {
 			// TODO is this correct?

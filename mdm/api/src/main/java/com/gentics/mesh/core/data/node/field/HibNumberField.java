@@ -5,9 +5,8 @@ import com.gentics.mesh.core.data.HibFieldContainer;
 import com.gentics.mesh.core.data.node.field.nesting.HibListableField;
 import com.gentics.mesh.core.rest.node.field.NumberField;
 import com.gentics.mesh.core.rest.node.field.impl.NumberFieldImpl;
-import com.gentics.mesh.handler.ActionContext;
 
-public interface HibNumberField extends HibListableField, HibBasicField<NumberField> {
+public interface HibNumberField extends HibListableField, HibTransformableField<NumberField> {
 
 	/**
 	 * Set the number in the graph field.
@@ -31,7 +30,7 @@ public interface HibNumberField extends HibListableField, HibBasicField<NumberFi
 	}
 
 	@Override
-	default NumberField transformToRest(ActionContext ac) {
+	default NumberField transformToRest(FieldTransformParameters fieldTransformParameters) {
 		NumberField restModel = new NumberFieldImpl();
 		restModel.setNumber(getNumber());
 		return restModel;

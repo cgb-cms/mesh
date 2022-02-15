@@ -7,9 +7,8 @@ import com.gentics.mesh.core.data.HibFieldContainer;
 import com.gentics.mesh.core.data.node.field.nesting.HibListableField;
 import com.gentics.mesh.core.rest.node.field.DateField;
 import com.gentics.mesh.core.rest.node.field.impl.DateFieldImpl;
-import com.gentics.mesh.handler.ActionContext;
 
-public interface HibDateField extends HibListableField, HibBasicField<DateField> {
+public interface HibDateField extends HibListableField, HibTransformableField<DateField> {
 
 	/**
 	 * Set the date within the field.
@@ -33,7 +32,7 @@ public interface HibDateField extends HibListableField, HibBasicField<DateField>
 	}
 
 	@Override
-	default DateField transformToRest(ActionContext ac) {
+	default DateField transformToRest(FieldTransformParameters parameters) {
 		DateField dateField = new DateFieldImpl();
 		dateField.setDate(toISO8601(getDate()));
 		return dateField;

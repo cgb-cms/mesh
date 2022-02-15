@@ -1,14 +1,12 @@
 package com.gentics.mesh.core.data.node.field;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.gentics.mesh.core.data.HibFieldContainer;
 import com.gentics.mesh.core.data.node.field.nesting.HibListableField;
 import com.gentics.mesh.core.rest.node.field.HtmlField;
 import com.gentics.mesh.core.rest.node.field.impl.HtmlFieldImpl;
-import com.gentics.mesh.handler.ActionContext;
+import org.apache.commons.lang3.StringUtils;
 
-public interface HibHtmlField extends HibListableField, HibBasicField<HtmlField> {
+public interface HibHtmlField extends HibListableField, HibTransformableField<HtmlField> {
 
 	/**
 	 * Set the HTML field value for the field.
@@ -32,7 +30,7 @@ public interface HibHtmlField extends HibListableField, HibBasicField<HtmlField>
 	}
 
 	@Override
-	default HtmlField transformToRest(ActionContext ac) {
+	default HtmlField transformToRest(FieldTransformParameters parameters) {
 		HtmlFieldImpl htmlField = new HtmlFieldImpl();
 		String html = getHTML();
 		// TODO really empty string for unset field value?!

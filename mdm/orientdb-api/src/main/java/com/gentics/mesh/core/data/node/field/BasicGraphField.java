@@ -9,7 +9,7 @@ import com.gentics.mesh.core.rest.node.field.Field;
  * @param <T>
  *            REST type of the field
  */
-public interface BasicGraphField<T extends Field> extends MicroschemaListableGraphField, HibBasicField<T> {
+public interface BasicGraphField<T extends Field> extends MicroschemaListableGraphField, HibTransformableField<T> {
 
 
 }

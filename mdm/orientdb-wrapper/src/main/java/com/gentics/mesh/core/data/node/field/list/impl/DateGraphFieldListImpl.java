@@ -11,6 +11,7 @@ import com.gentics.mesh.context.BulkActionContext;
 import com.gentics.mesh.context.InternalActionContext;
 import com.gentics.mesh.core.data.generic.MeshVertexImpl;
 import com.gentics.mesh.core.data.node.field.DateGraphField;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.data.node.field.HibDateField;
 import com.gentics.mesh.core.data.node.field.impl.DateGraphFieldImpl;
 import com.gentics.mesh.core.data.node.field.list.AbstractBasicGraphFieldList;
@@ -61,7 +62,7 @@ public class DateGraphFieldListImpl extends AbstractBasicGraphFieldList<HibDateF
 	}
 
 	@Override
-	public DateFieldListImpl transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	public DateFieldListImpl transformToRest(FieldTransformParameters transformParameters) {
 		DateFieldListImpl restModel = new DateFieldListImpl();
 		for (HibDateField item : getList()) {
 			restModel.add(toISO8601(item.getDate()));

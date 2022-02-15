@@ -4,9 +4,8 @@ import com.gentics.mesh.core.data.HibFieldContainer;
 import com.gentics.mesh.core.data.node.field.nesting.HibListableField;
 import com.gentics.mesh.core.rest.node.field.StringField;
 import com.gentics.mesh.core.rest.node.field.impl.StringFieldImpl;
-import com.gentics.mesh.handler.ActionContext;
 
-public interface HibStringField extends HibListableField, HibBasicField<StringField>, HibDisplayField {
+public interface HibStringField extends HibListableField, HibTransformableField<StringField>, HibDisplayField {
 
 	/**
 	 * Return the graph string value.
@@ -35,7 +34,7 @@ public interface HibStringField extends HibListableField, HibBasicField<StringFi
 	}
 
 	@Override
-	default StringField transformToRest(ActionContext ac) {
+	default StringField transformToRest(FieldTransformParameters parameters) {
 		StringFieldImpl stringField = new StringFieldImpl();
 		String text = getString();
 		stringField.setString(text == null ? "" : text);

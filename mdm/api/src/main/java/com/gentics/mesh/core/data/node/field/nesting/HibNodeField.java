@@ -1,19 +1,17 @@
 package com.gentics.mesh.core.data.node.field.nesting;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import com.gentics.mesh.context.InternalActionContext;
 import com.gentics.mesh.core.data.HibNodeFieldContainer;
 import com.gentics.mesh.core.data.node.HibNode;
+import com.gentics.mesh.core.data.node.field.HibTransformableField;
 import com.gentics.mesh.core.rest.common.ReferenceType;
 import com.gentics.mesh.core.rest.node.field.NodeField;
-
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
-public interface HibNodeField extends HibListableField {
+public interface HibNodeField extends HibListableField, HibTransformableField<NodeField> {
 
 	Logger log = LoggerFactory.getLogger(HibNodeField.class);
 
@@ -23,18 +21,6 @@ public interface HibNodeField extends HibListableField {
 	 * @return Node for this field when set, otherwise null.
 	 */
 	HibNode getNode();
-
-	/**
-	 * Transform the graph field into a rest field.
-	 *
-	 * @param ac
-	 * @param fieldKey
-	 * @param languageTags
-	 *            list of language tags
-	 * @param level
-	 *            Level of transformation
-	 */
-	NodeField transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level);
 
 	/**
 	 * Loads the content that is referencing another node.

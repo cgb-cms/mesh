@@ -12,6 +12,7 @@ import com.gentics.mesh.core.data.branch.HibBranch;
 import com.gentics.mesh.core.data.dao.ContentDao;
 import com.gentics.mesh.core.data.dao.UserDao;
 import com.gentics.mesh.core.data.node.HibNode;
+import com.gentics.mesh.core.data.node.field.FieldTransformParameters;
 import com.gentics.mesh.core.db.CommonTx;
 import com.gentics.mesh.core.db.Tx;
 import com.gentics.mesh.core.link.WebRootLinkReplacer;
@@ -32,7 +33,12 @@ import com.gentics.mesh.util.CompareUtils;
 public interface HibNodeFieldCommon extends HibNodeField {
 
 	@Override
-	default NodeField transformToRest(InternalActionContext ac, String fieldKey, List<String> languageTags, int level) {
+	default NodeField transformToRest(FieldTransformParameters transformParameters) {
+		InternalActionContext ac = transformParameters.ac();
+		String fieldKey = transformParameters.fieldKey();
+		List<String> languageTags = transformParameters.languageTags();
+		int level = transformParameters.level();
+
 		// TODO handle null across all types
 		// if (getNode() != null) {
 		NodeParameters parameters = ac.getNodeParameters();
