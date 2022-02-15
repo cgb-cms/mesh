@@ -17,7 +17,6 @@ import static com.gentics.mesh.core.data.node.field.RestGetters.S3_BINARY_GETTER
 import static com.gentics.mesh.core.data.node.field.RestGetters.STRING_GETTER;
 import static com.gentics.mesh.core.data.node.field.RestGetters.STRING_LIST_GETTER;
 import static com.gentics.mesh.core.data.node.field.RestTransformers.HTML_TRANSFORMER;
-import static com.gentics.mesh.core.data.node.field.RestTransformers.NODE_TRANSFORMER;
 import static com.gentics.mesh.core.data.node.field.RestTransformers.STRING_TRANSFORMER;
 import static com.gentics.mesh.core.data.node.field.RestUpdaters.BINARY_UPDATER;
 import static com.gentics.mesh.core.data.node.field.RestUpdaters.BOOLEAN_LIST_UPDATER;
@@ -84,35 +83,35 @@ public class FieldTypesOperations<T extends Field, R extends HibField & HibTrans
 
 	public static final FieldTypesOperations<StringField, HibStringField> STRING = new FieldTypesOperations<>(STRING_TRANSFORMER, STRING_UPDATER, STRING_GETTER);
 
-	public static final FieldTypesOperations<StringFieldListImpl, HibStringFieldList> STRING_LIST = new FieldTypesOperations<>(FieldTransformer.nullSafe(), STRING_LIST_UPDATER, STRING_LIST_GETTER);
+	public static final FieldTypesOperations<StringFieldListImpl, HibStringFieldList> STRING_LIST = new FieldTypesOperations<>(FieldTransformer.noTransform(), STRING_LIST_UPDATER, STRING_LIST_GETTER);
 
-	public static final FieldTypesOperations<NumberField, HibNumberField> NUMBER = new FieldTypesOperations<>(FieldTransformer.nullSafe(), NUMBER_UPDATER, NUMBER_GETTER);
+	public static final FieldTypesOperations<NumberField, HibNumberField> NUMBER = new FieldTypesOperations<>(FieldTransformer.noTransform(), NUMBER_UPDATER, NUMBER_GETTER);
 
-	public static final FieldTypesOperations<NumberFieldListImpl, HibNumberFieldList> NUMBER_LIST = new FieldTypesOperations<>(FieldTransformer.nullSafe(), NUMBER_LIST_UPDATER, NUMBER_LIST_GETTER);
+	public static final FieldTypesOperations<NumberFieldListImpl, HibNumberFieldList> NUMBER_LIST = new FieldTypesOperations<>(FieldTransformer.noTransform(), NUMBER_LIST_UPDATER, NUMBER_LIST_GETTER);
 
-	public static final FieldTypesOperations<DateField, HibDateField> DATE = new FieldTypesOperations<>(FieldTransformer.nullSafe(), DATE_UPDATER, DATE_GETTER);
+	public static final FieldTypesOperations<DateField, HibDateField> DATE = new FieldTypesOperations<>(FieldTransformer.noTransform(), DATE_UPDATER, DATE_GETTER);
 
-	public static final FieldTypesOperations<DateFieldListImpl, HibDateFieldList> DATE_LIST = new FieldTypesOperations<>(FieldTransformer.nullSafe(), DATE_LIST_UPDATER, DATE_LIST_GETTER);
+	public static final FieldTypesOperations<DateFieldListImpl, HibDateFieldList> DATE_LIST = new FieldTypesOperations<>(FieldTransformer.noTransform(), DATE_LIST_UPDATER, DATE_LIST_GETTER);
 
-	public static final FieldTypesOperations<BooleanField, HibBooleanField> BOOLEAN = new FieldTypesOperations<>(FieldTransformer.nullSafe(), BOOLEAN_UPDATER, BOOLEAN_GETTER);
+	public static final FieldTypesOperations<BooleanField, HibBooleanField> BOOLEAN = new FieldTypesOperations<>(FieldTransformer.noTransform(), BOOLEAN_UPDATER, BOOLEAN_GETTER);
 
-	public static final FieldTypesOperations<BooleanFieldListImpl, HibBooleanFieldList> BOOLEAN_LIST = new FieldTypesOperations<>(FieldTransformer.nullSafe(), BOOLEAN_LIST_UPDATER, BOOLEAN_LIST_GETTER);
+	public static final FieldTypesOperations<BooleanFieldListImpl, HibBooleanFieldList> BOOLEAN_LIST = new FieldTypesOperations<>(FieldTransformer.noTransform(), BOOLEAN_LIST_UPDATER, BOOLEAN_LIST_GETTER);
 
 	public static final FieldTypesOperations<HtmlField, HibHtmlField> HTML = new FieldTypesOperations<>(HTML_TRANSFORMER, HTML_UPDATER, HTML_GETTER);
 
-	public static final FieldTypesOperations<HtmlFieldListImpl, HibHtmlFieldList> HTML_LIST = new FieldTypesOperations<>(FieldTransformer.nullSafe(), HTML_LIST_UPDATER, HTML_LIST_GETTER);
+	public static final FieldTypesOperations<HtmlFieldListImpl, HibHtmlFieldList> HTML_LIST = new FieldTypesOperations<>(FieldTransformer.noTransform(), HTML_LIST_UPDATER, HTML_LIST_GETTER);
 
-	public static final FieldTypesOperations<MicronodeField, HibMicronodeField> MICRONODE = new FieldTypesOperations<>(FieldTransformer.nullSafe(), MICRONODE_UPDATER, MICRONODE_GETTER);
+	public static final FieldTypesOperations<MicronodeField, HibMicronodeField> MICRONODE = new FieldTypesOperations<>(FieldTransformer.noTransform(), MICRONODE_UPDATER, MICRONODE_GETTER);
 
-	public static final FieldTypesOperations<MicronodeFieldList, HibMicronodeFieldList> MICRONODE_LIST = new FieldTypesOperations<>(FieldTransformer.nullSafe(), MICRONODE_LIST_UPDATER, MICRONODE_LIST_GETTER);
+	public static final FieldTypesOperations<MicronodeFieldList, HibMicronodeFieldList> MICRONODE_LIST = new FieldTypesOperations<>(FieldTransformer.noTransform(), MICRONODE_LIST_UPDATER, MICRONODE_LIST_GETTER);
 
-	public static final FieldTypesOperations<NodeField, HibNodeField> NODE = new FieldTypesOperations<>(NODE_TRANSFORMER, NODE_UPDATER, NODE_GETTER);
+	public static final FieldTypesOperations<NodeField, HibNodeField> NODE = new FieldTypesOperations<>(FieldTransformer.noTransform(), NODE_UPDATER, NODE_GETTER);
 
-	public static final FieldTypesOperations<NodeFieldList, HibNodeFieldList> NODE_LIST = new FieldTypesOperations<>(FieldTransformer.nullSafe(), NODE_LIST_UPDATER, NODE_LIST_GETTER);
+	public static final FieldTypesOperations<NodeFieldList, HibNodeFieldList> NODE_LIST = new FieldTypesOperations<>(FieldTransformer.noTransform(), NODE_LIST_UPDATER, NODE_LIST_GETTER);
 
-	public static final FieldTypesOperations<BinaryField, HibBinaryField> BINARY = new FieldTypesOperations<>(FieldTransformer.nullSafe(), BINARY_UPDATER, BINARY_GETTER);
+	public static final FieldTypesOperations<BinaryField, HibBinaryField> BINARY = new FieldTypesOperations<>(FieldTransformer.noTransform(), BINARY_UPDATER, BINARY_GETTER);
 
-	public static final FieldTypesOperations<S3BinaryField, S3HibBinaryField> S3BINARY = new FieldTypesOperations<>(FieldTransformer.nullSafe(), S3_BINARY_UPDATER, S3_BINARY_GETTER);
+	public static final FieldTypesOperations<S3BinaryField, S3HibBinaryField> S3BINARY = new FieldTypesOperations<>(FieldTransformer.noTransform(), S3_BINARY_UPDATER, S3_BINARY_GETTER);
 
 	public static final Map<String, FieldTypesOperations<?, ?>> combinedTypeMap = ImmutableMap.<String, FieldTypesOperations<?, ?>>builder()
 			.put("string", STRING)
@@ -133,11 +132,11 @@ public class FieldTypesOperations<T extends Field, R extends HibField & HibTrans
 			.put("list.node", NODE_LIST)
 			.build();
 
-	private final FieldTransformer<T, R> transformer;
+	private final FieldTransformer<T> transformer;
 	private final FieldUpdater updater;
 	private final FieldGetter<R> getter;
 
-	FieldTypesOperations(FieldTransformer<T, R> transformer, FieldUpdater updater, FieldGetter<R> getter) {
+	FieldTypesOperations(FieldTransformer<T> transformer, FieldUpdater updater, FieldGetter<R> getter) {
 		this.transformer = transformer;
 		this.updater = updater;
 		this.getter = getter;
@@ -177,30 +176,33 @@ public class FieldTypesOperations<T extends Field, R extends HibField & HibTrans
 	public Field getRestFieldFromEntity(HibFieldContainer container, InternalActionContext ac, String fieldKey,
 										List<String> languageTags, int level, Supplier<HibNode> parentNode) {
 		FieldTransformParameters transformParameters = fromParameters(ac, fieldKey, languageTags, level);
-		Supplier<R> stringFunction = () -> getter.get(container, fieldKey);
-		return transformer.transform(stringFunction, transformParameters, fieldKey, parentNode);
+		R entityField = getter.get(container, fieldKey);
+		T restField = entityField == null ? null : entityField.transformToRest(transformParameters);
+
+		return transformer.transform(restField, transformParameters, parentNode);
 	}
 
 	/**
+	 * Invoke the type specific field transformer using the provided information.
 	 *
-	 * @param supplier
-	 * 			Supply a HibField
+	 * @param restField
+	 *            The rest field
 	 * @param ac
-	 * 			Action Context
+	 *            Action context
 	 * @param fieldKey
-	 * 			Field key
+	 *            Field key
 	 * @param languageTags
-	 * 			Language tags used to apply language fallback
+	 *            Language tags used to apply language fallback
 	 * @param level
-	 * 			Current level of transformation
+	 *            Current level of transformation
 	 * @param parentNode
-	 * 			Supply the parent node
 	 * @return
 	 */
-	public Field getRestFieldFromEntity(Supplier<R> supplier, InternalActionContext ac, String fieldKey,
+	@SuppressWarnings("unchecked")
+	public Field transformField(Field restField, InternalActionContext ac, String fieldKey,
 										List<String> languageTags, int level, Supplier<HibNode> parentNode) {
 		FieldTransformParameters transformParameters = fromParameters(ac, fieldKey, languageTags, level);
-		return transformer.transform(supplier, transformParameters, fieldKey, parentNode);
+		return transformer.transform((T) restField, transformParameters, parentNode);
 	}
 
 	/**

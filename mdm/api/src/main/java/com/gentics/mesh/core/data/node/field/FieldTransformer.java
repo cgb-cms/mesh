@@ -1,43 +1,36 @@
 package com.gentics.mesh.core.data.node.field;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
+
+import javax.annotation.CheckForNull;
 
 import com.gentics.mesh.core.data.node.HibNode;
 import com.gentics.mesh.core.rest.node.field.Field;
 
 /**
- * Transformer for domain models of fields into REST models.
+ * Apply some additional mapping to the provided rest field
+ *
  * 
  * @param <T>
  *            REST model type of the field
  */
 @FunctionalInterface
-public interface FieldTransformer<T extends Field, R extends HibTransformableField<T>> {
+public interface FieldTransformer<T extends Field> {
 
 	/**
-	 * Load the field with the given key from the container and transform it to its rest representation.
+	 * Apply some additional transformation to the rest field
 	 * 
-	 * @param fieldProvider
-	 *            Provide the entity field
+	 * @param field
+	 *            The field
 	 * @param transformParameters
 	 * 			  Holds rest transform parameters
-	 * @param fieldKey
-	 *            Key of the field to be transformed
 	 * @param parentNode
+	 * 			  The parent node
 	 * @return
 	 */
-	T transform(Supplier<R> fieldProvider, FieldTransformParameters transformParameters, String fieldKey, Supplier<HibNode> parentNode);
+	T transform(@CheckForNull T field, FieldTransformParameters transformParameters, Supplier<HibNode> parentNode);
 
-
-	static <T extends Field, R extends HibTransformableField<T>> FieldTransformer<T, R> nullSafe() {
-		return (supplier, transformParameters, fieldKey, parentNode) -> {
-			R field = supplier.get();
-			if (field == null) {
-				return null;
-			} else {
-				return field.transformToRest(transformParameters);
-			}
-		};
+	static <T extends Field> FieldTransformer<T> noTransform() {
+		return (field, transformParameters, parentNode) -> field;
 	}
 }
