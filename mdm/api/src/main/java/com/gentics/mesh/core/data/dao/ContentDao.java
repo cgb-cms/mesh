@@ -17,6 +17,7 @@ import com.gentics.mesh.context.InternalActionContext;
 import com.gentics.mesh.context.impl.DummyBulkActionContext;
 import com.gentics.mesh.core.data.HibNodeFieldContainer;
 import com.gentics.mesh.core.data.HibNodeFieldContainerEdge;
+import com.gentics.mesh.core.data.ReadOnlyNodeFieldContainer;
 import com.gentics.mesh.core.data.branch.HibBranch;
 import com.gentics.mesh.core.data.diff.FieldContainerChange;
 import com.gentics.mesh.core.data.node.HibNode;
@@ -33,6 +34,7 @@ import com.gentics.mesh.core.rest.event.node.NodeMeshEventModel;
 import com.gentics.mesh.core.rest.node.FieldMap;
 import com.gentics.mesh.core.rest.node.version.VersionInfo;
 import com.gentics.mesh.core.result.Result;
+import com.gentics.mesh.parameter.value.FieldsSet;
 import com.gentics.mesh.path.Path;
 import com.gentics.mesh.util.VersionNumber;
 
@@ -348,18 +350,6 @@ public interface ContentDao {
 	 * @return
 	 */
 	long getFieldContainerCount(HibNode node);
-
-	/**
-	 * Find a node field container that matches the nearest possible value for the language parameter. When a user requests a node using ?lang=de,en and there
-	 * is no de version the en version will be selected and returned.
-	 *
-	 * @param languageTags
-	 * @param branchUuid
-	 *            branch Uuid
-	 * @param version
-	 *            requested version. This must either be "draft" or "published" or a version number with pattern [major.minor]
-	 * @return Next matching field container or null when no language matches
-	 */
 
 	/**
 	 * Find a node field container that matches the nearest possible value for the language parameter. When a user requests a node using ?lang=de,en and there
@@ -938,4 +928,14 @@ public interface ContentDao {
 	 * @return
 	 */
 	Result<? extends HibNodeFieldContainerEdge> getEdges(HibNodeFieldContainer content);
+
+	/**
+	 * Build a read only field container from the provided arguments. This method should be used to prefetch all information
+	 * required by the fieldSet in one go
+	 * @param fieldSet
+	 * @param content
+	 * @param node
+	 * @return
+	 */
+	ReadOnlyNodeFieldContainer fromContent(FieldsSet fieldSet, HibNodeFieldContainer content, HibNode node);
 }

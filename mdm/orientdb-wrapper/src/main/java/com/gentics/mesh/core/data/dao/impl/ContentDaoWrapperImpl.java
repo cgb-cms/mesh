@@ -10,6 +10,8 @@ import java.util.stream.Stream;
 
 import javax.inject.Inject;
 
+import com.gentics.mesh.core.data.ReadOnlyNodeFieldContainer;
+import com.gentics.mesh.parameter.value.FieldsSet;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gentics.mesh.context.BulkActionContext;

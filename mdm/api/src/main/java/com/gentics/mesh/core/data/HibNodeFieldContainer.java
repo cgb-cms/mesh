@@ -9,7 +9,6 @@ import com.gentics.mesh.core.data.dao.ContentDao;
 import com.gentics.mesh.core.data.node.HibNode;
 import com.gentics.mesh.core.data.schema.HibSchemaVersion;
 import com.gentics.mesh.core.data.user.HibEditorTracking;
-import com.gentics.mesh.core.db.Tx;
 import com.gentics.mesh.core.rest.common.ContainerType;
 import com.gentics.mesh.core.rest.common.ReferenceType;
 import com.gentics.mesh.util.ETag;
@@ -66,7 +65,7 @@ public interface HibNodeFieldContainer extends HibFieldContainer, HibEditorTrack
 
 	/**
 	 * Get the Version Number or null if no version set.
-	 * 
+	 *
 	 * @return Version Number
 	 */
 	VersionNumber getVersion();

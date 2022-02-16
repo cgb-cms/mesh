@@ -37,10 +37,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.gentics.mesh.core.data.ReadOnlyNodeFieldContainer;
 import com.gentics.mesh.core.data.node.field.HibBinaryField;
 import com.gentics.mesh.core.data.node.field.HibStringField;
 import com.gentics.mesh.core.data.node.field.nesting.HibNodeField;
 import com.gentics.mesh.core.data.s3binary.S3HibBinaryField;
+import com.gentics.mesh.core.rest.node.FieldMapImpl;
+import com.gentics.mesh.core.rest.node.field.Field;
+import com.gentics.mesh.core.rest.schema.FieldSchema;
 import com.gentics.mesh.path.Path;
 import com.gentics.mesh.path.PathSegment;
 import com.gentics.mesh.path.impl.PathSegmentImpl;
@@ -72,17 +76,14 @@ import com.gentics.mesh.core.rest.event.node.NodeMovedEventModel;
 import com.gentics.mesh.core.rest.event.node.NodeTaggedEventModel;
 import com.gentics.mesh.core.rest.navigation.NavigationElement;
 import com.gentics.mesh.core.rest.navigation.NavigationResponse;
-import com.gentics.mesh.core.rest.node.FieldMapImpl;
 import com.gentics.mesh.core.rest.node.NodeChildrenInfo;
 import com.gentics.mesh.core.rest.node.NodeCreateRequest;
 import com.gentics.mesh.core.rest.node.NodeResponse;
 import com.gentics.mesh.core.rest.node.NodeUpdateRequest;
 import com.gentics.mesh.core.rest.node.PublishStatusModel;
 import com.gentics.mesh.core.rest.node.PublishStatusResponse;
-import com.gentics.mesh.core.rest.node.field.Field;
 import com.gentics.mesh.core.rest.node.version.NodeVersionsResponse;
 import com.gentics.mesh.core.rest.node.version.VersionInfo;
-import com.gentics.mesh.core.rest.schema.FieldSchema;
 import com.gentics.mesh.core.rest.schema.SchemaModel;
 import com.gentics.mesh.core.rest.schema.SchemaReferenceInfo;
 import com.gentics.mesh.core.rest.tag.TagReference;
@@ -355,7 +356,8 @@ public interface PersistingNodeDao extends NodeDao, PersistingRootDao<HibProject
 
 		// First check whether the NGFC for the requested language,branch and version could be found.
 		ContentDao contentDao = Tx.get().contentDao();
-		HibNodeFieldContainer fieldContainer = contentDao.findVersion(node, requestedLanguageTags, branch.getUuid(), versioiningParameters.getVersion());
+		HibNodeFieldContainer content = contentDao.findVersion(node, requestedLanguageTags, branch.getUuid(), versioiningParameters.getVersion());
+		ReadOnlyNodeFieldContainer fieldContainer = contentDao.fromContent(fieldsSet, content, node);
 		if (fieldContainer == null) {
 			// If a published version was requested, we check whether any
 			// published language variant exists for the node, if not, response
@@ -388,7 +390,7 @@ public interface PersistingNodeDao extends NodeDao, PersistingRootDao<HibProject
 			// We should change this behaviour and update the client implementations.
 			// throw error(NOT_FOUND, "object_not_found_for_uuid", getUuid());
 		} else {
-			SchemaModel schema = contentDao.getSchemaContainerVersion(fieldContainer).getSchema();
+			SchemaModel schema = fieldContainer.getSchemaContainerVersion().getSchema();
 			if (fieldsSet.has("container")) {
 				restNode.setContainer(schema.getContainer());
 			}
@@ -411,7 +413,7 @@ public interface PersistingNodeDao extends NodeDao, PersistingRootDao<HibProject
 
 			// Schema reference
 			if (fieldsSet.has("schema")) {
-				restNode.setSchema(contentDao.getSchemaContainerVersion(fieldContainer).transformToReference());
+				restNode.setSchema(fieldContainer.getSchemaContainerVersion().transformToReference());
 			}
 
 			// Version reference

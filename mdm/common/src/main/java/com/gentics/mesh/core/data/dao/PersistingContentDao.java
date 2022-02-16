@@ -25,7 +25,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.gentics.mesh.core.data.ReadOnlyNodeFieldContainer;
 import com.gentics.mesh.core.rest.common.FieldTypes;
+import com.gentics.mesh.parameter.value.FieldsSet;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -892,6 +894,51 @@ public interface PersistingContentDao extends ContentDao {
 	@Override
 	default Result<HibNodeFieldContainer> versions(HibNodeFieldContainer content) {
 		return new TraversalResult<>(StreamUtil.untilNull(() -> content, HibNodeFieldContainer::getPreviousVersion));
+	}
+
+	@Override
+	default ReadOnlyNodeFieldContainer fromContent(FieldsSet fieldSet, HibNodeFieldContainer content, HibNode node) {
+		return new ReadOnlyNodeFieldContainer() {
+			@Override
+			public Object getId() {
+				return content.getId();
+			}
+
+			@Override
+			public String getLanguageTag() {
+				return content.getLanguageTag();
+			}
+
+			@Override
+			public VersionNumber getVersion() {
+				return content.getVersion();
+			}
+
+			@Override
+			public HibSchemaVersion getSchemaContainerVersion() {
+				return content.getSchemaContainerVersion();
+			}
+
+			@Override
+			public HibUser getEditor() {
+				return content.getEditor();
+			}
+
+			@Override
+			public Long getLastEditedTimestamp() {
+				return content.getLastEditedTimestamp();
+			}
+
+			@Override
+			public String getLastEditedDate() {
+				return content.getLastEditedDate();
+			}
+
+			@Override
+			public Field getRestField(InternalActionContext ac, String name, FieldSchema fieldEntry, List<String> containerLanguageTags, int level) {
+				return content.getRestField(ac, name, fieldEntry, containerLanguageTags, level);
+			}
+		};
 	}
 }
 

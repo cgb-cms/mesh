@@ -11,6 +11,7 @@ import com.gentics.mesh.context.InternalActionContext;
 import com.gentics.mesh.core.data.HibCoreElement;
 import com.gentics.mesh.core.data.HibNodeFieldContainer;
 import com.gentics.mesh.core.data.HibNodeFieldContainerEdge;
+import com.gentics.mesh.core.data.ReadOnlyNodeFieldContainer;
 import com.gentics.mesh.core.data.branch.HibBranch;
 import com.gentics.mesh.core.data.node.HibNode;
 import com.gentics.mesh.core.data.page.Page;
@@ -32,6 +33,7 @@ import com.gentics.mesh.event.Assignment;
 import com.gentics.mesh.event.EventQueueBatch;
 import com.gentics.mesh.handler.ActionContext;
 import com.gentics.mesh.parameter.PagingParameters;
+import com.gentics.mesh.parameter.value.FieldsSet;
 import com.gentics.mesh.path.Path;
 
 /**
